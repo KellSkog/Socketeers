@@ -2,6 +2,8 @@
 
 RaggSock::RaggSock()
 {
+
+	result = NULL; ptr = NULL;
 	int iResult;
 
 	// Initialize Winsock
@@ -17,7 +19,22 @@ RaggSock::RaggSock()
 	hints.ai_protocol = IPPROTO_TCP;
 	//return 0;
 }
-
+RaggSock *RaggSock::family(int fam) {
+	hints.ai_family = fam;
+	return this;
+}
+RaggSock *RaggSock::socktype(int socktype) {
+	hints.ai_socktype = socktype;
+	return this;
+}
+RaggSock *RaggSock::protocol(int protocol) {
+	hints.ai_protocol = protocol;
+	return this;
+}
+RaggSock *RaggSock::flags(int flags) {
+	hints.ai_flags = flags;
+	return this;
+}
 RaggSock::~RaggSock()
 {
 }
