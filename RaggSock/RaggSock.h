@@ -9,10 +9,11 @@
 
 class RaggSock
 {
+	//SOCKET ConnectSocket;
 public:
 	WSADATA wsaData;
 	struct addrinfo *result, *ptr, hints;
-
+	int getInfo(char *argv, const char *port);
 	RaggSock();
 	RaggSock *family(int fam);
 	RaggSock *socktype(int socktype);

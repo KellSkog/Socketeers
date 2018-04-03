@@ -2,7 +2,7 @@
 
 RaggSock::RaggSock()
 {
-
+	
 	result = NULL; ptr = NULL;
 	int iResult;
 
@@ -17,7 +17,9 @@ RaggSock::RaggSock()
 	hints.ai_family = AF_UNSPEC;
 	hints.ai_socktype = SOCK_STREAM;
 	hints.ai_protocol = IPPROTO_TCP;
-	//return 0;
+	
+	//ptr = result;
+	//ConnectSocket = socket(ptr->ai_family, ptr->ai_socktype, ptr->ai_protocol);
 }
 RaggSock *RaggSock::family(int fam) {
 	hints.ai_family = fam;
@@ -34,6 +36,16 @@ RaggSock *RaggSock::protocol(int protocol) {
 RaggSock *RaggSock::flags(int flags) {
 	hints.ai_flags = flags;
 	return this;
+}
+int RaggSock::getInfo(char *argv, const char * port) {
+	int iResult = getaddrinfo(argv, port, &hints, &result);
+	if (iResult != 0) {
+		printf("getaddrinfo failed: %d\n", iResult);
+		WSACleanup();
+		exit(1);
+		//return 1;
+	}
+	return iResult;
 }
 RaggSock::~RaggSock()
 {
